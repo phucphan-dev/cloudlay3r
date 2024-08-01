@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <title>Cloudlay 3R</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Cloudlay 3R</h1>
+    <div style="margin-top: '48px'">
+        <input type="file" name="upload" id="upload">
+        <button id="submit">Upload</button>
+        <div id="loading" class="spinnerDotLoading hidden"></div>
+        <div id="error" class="hidden"></div>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+
+</html>
