@@ -1,3 +1,73 @@
+body, html{
+    font-family: "Roboto", sans-serif;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.uploader{
+    width: 320px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px dashed #1c274c;
+    color: #1c274c;
+}
+
+.uploader img{
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.file-name{
+    color: #1c274c;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.progress-bar{
+    position: relative;
+    width: 90%;
+    height: 8px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.progress-bar.hide{
+    display: none;
+}
+
+.progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #1c274c;
+    transition: 0.25s ease-in-out;
+    border-radius: 4px;
+}
+
+.btn-upload{
+    background: #1c274c;
+    color: white;
+    width: 320px;
+    height: 48px;
+    border: 0;
+    box-shadow: none;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 16px;
+}
+
 #error.hidden {
     display: none;
     visibility: hidden

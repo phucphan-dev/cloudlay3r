@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
-    <title>Cloudlay 3R</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+        <title>Cloudlay 3R</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+            </style>
+        <link rel="stylesheet" href="styles.css">
+        <script
+            src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
 
-<body>
-    <h1>Cloudlay 3R</h1>
-    <div style="margin-top: '48px'">
-        <input type="file" name="upload" id="upload">
-        <button id="submit">Upload</button>
-        <div id="loading" class="spinnerDotLoading hidden"></div>
-        <div id="error" class="hidden"></div>
-    </div>
-    <script src="renderer.js"></script>
-</body>
+    <body>
+        <main>
+            <h1>Cloudlay 3R</h1>
+            <div style="margin-top: '48px'">
+                <label for="upload" class="uploader">
+                    <input hidden type="file" name="upload" id="upload">
+                    <img src="assets/ic_upload.svg" alt="icupload">
+                    <div class="file-name">Choose file</div>
+                    <div class="progress-bar hide">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                </label>
+                <button type="submit" id="submit"
+                    class="btn-upload">Upload</button>
+            </div>
+        </main>
+        <script src="renderer.js"></script>
+    </body>
 
 </html>
