@@ -38,3 +38,10 @@ document.getElementById('submit').addEventListener('click', async function (e) {
         document.querySelector('.progress-bar').classList.add('hide');
     }
 });
+
+const renderDataListBucket = async () => {
+    const data = await window.cloudlay.getDataBucket();
+    console.log({ data });
+}
+
+renderDataListBucket();

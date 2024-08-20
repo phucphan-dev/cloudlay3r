@@ -13,17 +13,16 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     })
-
+    const mc = new minio.Client({
+        endPoint: 'sg-central-1.cloudlay3r.com',
+        useSSL: true,
+        accessKey: 'gBTMPBO5yMmFWD0Dvsg5',
+        secretKey: 'NoomOCZ2utFwh9BqOEoDQ6x6LJuWtcEvdQJUlsar',
+        region: 'us-west-1',
+    });
     ipcMain.handle('get-presigned-url', async (event, fileName) => {
-        const mc = new minio.Client({
-            endPoint: 'sg-central-1.cloudlay3r.com',
-            useSSL: true,
-            accessKey: 'gBTMPBO5yMmFWD0Dvsg5',
-            secretKey: 'NoomOCZ2utFwh9BqOEoDQ6x6LJuWtcEvdQJUlsar',
-            region: 'us-west-1',
-        });
         return new Promise((resolve, reject) => {
-            mc.presignedPutObject('loitran-20240517', fileName, 24 * 60 * 60, (err, url) => {
+            mc.presignedUrl('PUT', 'loitran-20240517', fileName, 24 * 60 * 60, { versionId: 'test-20082024' }, (err, url) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -32,6 +31,19 @@ function createWindow() {
             });
         });
     });
+
+    ipcMain.handle('get-bucket-data', async () => {
+        return new Promise((resolve, reject) => {
+            const objectsListTemp = [];
+            const stream = mc.listObjectsV2('loitran-20240517', '', true, '');
+
+            stream.on('data', obj => objectsListTemp.push(obj));
+            stream.on('error', reject);
+            stream.on('end', () => {
+                resolve(objectsListTemp);
+            });
+        });
+    })
 
     const env = process.env.NODE_ENV || 'development';
     // If development environment 
