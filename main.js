@@ -22,7 +22,18 @@ function createWindow() {
     });
     ipcMain.handle('get-presigned-url', async (event, fileName) => {
         return new Promise((resolve, reject) => {
-            mc.presignedUrl('PUT', 'loitran-20240517', fileName, 24 * 60 * 60, { versionId: 'test-20082024' }, (err, url) => {
+            mc.presignedUrl('PUT', 'loitran-20240517', fileName, 24 * 60 * 60, (err, url) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(url);
+                }
+            });
+        });
+    });
+    ipcMain.handle('download-file', async (event, fileName) => {
+        return new Promise((resolve, reject) => {
+            mc.presignedGetObject('loitran-20240517', fileName, 24 * 60 * 60, (err, url) => {
                 if (err) {
                     reject(err);
                 } else {

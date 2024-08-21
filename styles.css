@@ -1,6 +1,10 @@
 body, html{
     font-family: "Roboto", sans-serif;
 }
+
+*{
+    box-sizing: border-box;
+}
 main {
     display: flex;
     flex-direction: column;
@@ -205,4 +209,29 @@ main {
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+
+#listData {
+    width: 100%;
+    padding: 40px;
+}
+
+#listData  div {
+    margin-bottom: 16px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading.hidden{
+    display: none;
 }
