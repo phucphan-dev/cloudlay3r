@@ -40,11 +40,11 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     }
 });
 
-const download = async (name) => {
+const download = async (name, versionId) => {
     try {
         document.querySelector('.loading').classList.remove('hidden');
         // Request a pre-signed URL from the main process
-        const presignedUrl = await window.cloudlay.downloadFile(name);
+        const presignedUrl = await window.cloudlay.downloadFile(name, versionId);
 
         const response = await fetch(presignedUrl);
         console.log({ response });
@@ -71,9 +71,11 @@ const download = async (name) => {
 const renderDataListBucket = async () => {
     const data = await window.cloudlay.getDataBucket();
     data.forEach(element => {
+        console.log({ element });
+
         const node = document.createElement("div");
-        const textnode = document.createTextNode(element.name);
-        node.onclick = () => download(element.name);
+        const textnode = document.createTextNode(`${element.name}${element.versionId !== 'null' ? ` - Version: ${element.versionId}` : ''}`);
+        node.onclick = () => download(element.name, element.versionId);
         node.appendChild(textnode);
         listData.appendChild(node);
     });

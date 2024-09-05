@@ -20,6 +20,7 @@ function createWindow() {
         secretKey: 'NoomOCZ2utFwh9BqOEoDQ6x6LJuWtcEvdQJUlsar',
         region: 'us-west-1',
     });
+
     ipcMain.handle('get-presigned-url', async (event, fileName) => {
         return new Promise((resolve, reject) => {
             mc.presignedUrl('PUT', 'loitran-20240517', fileName, 24 * 60 * 60, (err, url) => {
@@ -31,9 +32,9 @@ function createWindow() {
             });
         });
     });
-    ipcMain.handle('download-file', async (event, fileName) => {
+    ipcMain.handle('download-file', async (event, downloadParams) => {
         return new Promise((resolve, reject) => {
-            mc.presignedGetObject('loitran-20240517', fileName, 24 * 60 * 60, (err, url) => {
+            mc.presignedGetObject('loitran-20240517', downloadParams.fileName, 24 * 60 * 60, { versionId: downloadParams.versionId }, (err, url) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -46,7 +47,7 @@ function createWindow() {
     ipcMain.handle('get-bucket-data', async () => {
         return new Promise((resolve, reject) => {
             const objectsListTemp = [];
-            const stream = mc.listObjectsV2('loitran-20240517', '', true, '');
+            const stream = mc.listObjects('loitran-20240517', '', true, { IncludeVersion: true });
 
             stream.on('data', obj => objectsListTemp.push(obj));
             stream.on('error', reject);
